@@ -34,12 +34,22 @@ function enterReminder(actualReminder) {
 }
 
 function continueWithReminder(reminder) {
+  // Clear the entire "Enter your survey number choice" section if it exists
+  var reminderPromptDiv = document.getElementById("reminderPrompt");
+  
+  if (reminderPromptDiv) {
+    // Reset the innerHTML to remove everything, including the input box and label
+    reminderPromptDiv.innerHTML = ''; 
+  }
+
+  // Proceed with the subdivisions input
   var subdivisionsInput = '<label for="subdivisions">Number of Subdivisions:</label>';
   subdivisionsInput += '<input type="number" id="subdivisions" name="subdivisions" min="1">';
   subdivisionsInput += '<button type="button" onclick="calculateFinalReminder(' + reminder + ')">Calculate selected subdivision</button>';
   
   document.getElementById("subdivisionsInput").innerHTML = subdivisionsInput;
 }
+
 
 function calculateReminderWithUserChoice(maxReminder) {
   var surveyNumber = parseInt(document.getElementById("surveyNumber").value); // Parse survey number value
@@ -78,4 +88,3 @@ function calculateFinalReminder(reminder) {
 function clearForm() {
   location.reload();
 }
-
